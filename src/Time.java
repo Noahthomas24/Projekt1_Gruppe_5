@@ -3,10 +3,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Time {
-    LocalTime tidspunkt = LocalTime.now();
-
-    public Time(LocalTime tidspunkt){
+    LocalTime tidspunkt;
+    LocalDate dato;
+    public Time(LocalTime tidspunkt, LocalDate dato) {
         this.tidspunkt=tidspunkt;
+        this.dato=dato;
     }
 
     @Override
