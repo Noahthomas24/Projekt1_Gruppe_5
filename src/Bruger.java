@@ -1,12 +1,27 @@
-abstract public class Bruger     {
-    private String navn;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
-    public Bruger (String navn){
-        this.navn=navn;
-    }
+public abstract class Bruger {
+    String name;
 
-    public String getNavn(){
-        return navn;
-    }
 }
 
+class Customer extends Bruger{
+    Time t;
+    int phone;
+    private static int i= 0;
+    static int kundeID=0;
+    public Customer(String name, Time t) {
+        this.name = name;
+        this.phone = phone;
+        this.t = t;
+        i++;
+        kundeID = i;
+
+    }
+
+    @Override
+    public String toString() {
+        return name+"-"+t;
+    }
+}

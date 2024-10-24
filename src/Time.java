@@ -12,6 +12,6 @@ public class Time {
 
     @Override
     public String toString() {
-        return "(" + tidspunkt +"-"+tidspunkt.plusMinutes(30)+ ')';
+        return "(" + tidspunkt +"-"+tidspunkt.plusMinutes(30)+ ')'+" "+dato;
     }
 }
