@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WeeklyCalendar {
+    int i;
     Scanner scanner = new Scanner(System.in);
     ArrayList<Time> generedeTider = new ArrayList();
     ArrayList<Time> ledigeTider = new ArrayList();
@@ -16,6 +17,28 @@ public class WeeklyCalendar {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM, yyyy");
         //System.out.println("\nWeekly Calendar:");
 
+    public void genTid() {
+        for (i = 0; i < 7; i++) {
+            LocalDate currentDate = startDate.plusDays(i);
+            String dayOfWeek = currentDate.format(formatter);
+
+            if (!dayOfWeek.contains("lørdag") && !dayOfWeek.contains("søndag")) {
+                System.out.println(currentDate.format(formatter));
+
+                generedeTider.clear(); //rydder listen så alt ikke tilføjes dobbelt
+
+                LocalTime currentStart = start; //resetter tiden hver dag
+
+                while (currentStart.isBefore(stop)) {
+                    generedeTider.add(new Time(currentStart, currentDate)); // Add new times for 30 min intervals
+                    currentStart = currentStart.plusMinutes(30);
+                }
+
+                ledigeTider.addAll(generedeTider);
+            }
+        }
+    }
+
     public void bookTid(String navn){//Modtager en scanner, hvor brugeren kan angive et tal til at vælge en ledig tid ud fra index nummeret.
         Time valgTid = ledigeTider.get(scanner.nextInt()-1);
         System.out.println("Du har valgt tiden: "+valgTid);
@@ -23,34 +46,7 @@ public class WeeklyCalendar {
         ledigeTider.remove(valgTid);
 
     }
-    public void genTid() {
 
-        for (int i = 0; i < 7; i++) {
-            LocalDate currentDate = startDate.plusDays(i);
-            String dayOfWeek = currentDate.format(formatter);
-
-
-            if (!dayOfWeek.contains("lørdag") && !dayOfWeek.contains("søndag")) {
-                System.out.println(currentDate.format(formatter));
-                dagsTider();
-                visTider();
-
-
-            }
-
-        }
-    }
-
-
-    public void dagsTider () { //generer dagens tider, og tilføjer til listen over ledige tider.
-        System.out.println(startDate);
-        while ((start.isBefore(stop))) { //Tjekker for åbningstider
-            generedeTider.add(new Time(start,startDate)); //Tilføjer nye tider til listen af 30 min intervallet.
-            start = start.plusMinutes(30);
-        }
-        ledigeTider.addAll(generedeTider); //Tilføjer dagens tider til ledigeTider listen.
-
-    }
     public void visTider() {// Viser alle ledige tider i listen ledigeTider
         int i = 0;
         for (Time s:ledigeTider){
