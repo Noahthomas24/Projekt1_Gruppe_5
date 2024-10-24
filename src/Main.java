@@ -7,8 +7,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         WeeklyCalendar g = new WeeklyCalendar();
-
         g.genTid();
+        g.visTider();
+        g.bookTid();
+        g.annullerTid();
         System.out.println();
 
 

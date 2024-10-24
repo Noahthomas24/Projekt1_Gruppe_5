@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,11 +21,8 @@ public class WeeklyCalendar {
     public void genTid() {
         for (i = 0; i < 7; i++) {
             LocalDate currentDate = startDate.plusDays(i);
-            String dayOfWeek = currentDate.format(formatter);
-
-            if (!dayOfWeek.contains("lørdag") && !dayOfWeek.contains("søndag")) {
-                System.out.println(currentDate.format(formatter));
-
+            DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
+            if (dayOfWeek!=DayOfWeek.SATURDAY && dayOfWeek!=DayOfWeek.SUNDAY) {
                 generedeTider.clear(); //rydder listen så alt ikke tilføjes dobbelt
 
                 LocalTime currentStart = start; //resetter tiden hver dag
@@ -36,12 +34,17 @@ public class WeeklyCalendar {
 
                 ledigeTider.addAll(generedeTider);
             }
+
         }
     }
 
-    public void bookTid(String navn){//Modtager en scanner, hvor brugeren kan angive et tal til at vælge en ledig tid ud fra index nummeret.
+    public void bookTid(){//Modtager en scanner, hvor brugeren kan angive et tal til at vælge en ledig tid ud fra index nummeret.
+        System.out.println("Indtast nummer for den tid du gerne vil vælge.");
         Time valgTid = ledigeTider.get(scanner.nextInt()-1);
         System.out.println("Du har valgt tiden: "+valgTid);
+        System.out.println("Indtast dit navn.");
+        scanner.nextLine();
+        String navn = scanner.nextLine();
         booketTider.add(new Customer(navn,valgTid));
         ledigeTider.remove(valgTid);
 
