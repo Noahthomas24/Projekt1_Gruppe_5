@@ -17,7 +17,7 @@ public class WeeklyCalendar {
     LocalTime start = LocalTime.of(10,0);
     LocalTime stop = LocalTime.of(18,0);
     LocalDate startDate = LocalDate.now();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM, yyyy");
+    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd MMMM, yyyy");
         //System.out.println("\nWeekly Calendar:");
 
     public void genTid() {
@@ -39,23 +39,7 @@ public class WeeklyCalendar {
 
         }
     }
-
-    public void bookTid(){//Modtager en scanner, hvor brugeren kan angive et tal til at vælge en ledig tid ud fra index nummeret.
-        System.out.println("Indtast nummer for den tid du gerne vil vælge.");
-        List<Time> tider = getTiderForDato(dateDatoValg);
-        int valg = scanner.nextInt()-1;
-        Time valgTid = tider.get(valg);
-        System.out.println("Du har valgt tiden: "+valgTid);
-        System.out.println("Indtast dit navn.");
-        scanner.nextLine();
-        String navn = scanner.nextLine();
-        booketTider.add(new Customer(navn,valgTid));
-        ledigeTider.remove(valgTid);
-
-    }
-
     public void visTider() {// Viser alle ledige tider i listen ledigeTider
-        int i = 0;
         List<LocalDate> dates = getNextFiveDays();
         System.out.println(dates);
         int valgtDato = scanner.nextInt();
@@ -85,7 +69,6 @@ public class WeeklyCalendar {
             System.out.println(i+ ": "+s);
         }*/
     }
-
     private void printTiderForDato(LocalDate date) {
         for (int i = 0; i<getTiderForDato(date).size();i++){
             if (getTiderForDato(date).get(i).dato == date){
@@ -93,6 +76,7 @@ public class WeeklyCalendar {
             }
         }
     }
+
     private List<Time> getTiderForDato(LocalDate date) {
         List<Time> tider = new ArrayList<>();
         for (int i = 0; i<ledigeTider.size();i++){
@@ -113,6 +97,21 @@ public class WeeklyCalendar {
         }
         return dates;
     }
+
+    public void bookTid(){//Modtager en scanner, hvor brugeren kan angive et tal til at vælge en ledig tid ud fra index nummeret.
+        System.out.println("Indtast nummer for den tid du gerne vil vælge.");
+        List<Time> tider = getTiderForDato(dateDatoValg);
+        int valg = scanner.nextInt()-1;
+        Time valgTid = tider.get(valg);
+        System.out.println("Du har valgt tiden: "+valgTid);
+        System.out.println("Indtast dit navn.");
+        scanner.nextLine();
+        String navn = scanner.nextLine();
+        booketTider.add(new Customer(navn,valgTid));
+        ledigeTider.remove(valgTid);
+
+    }
+
 
     public void annullerTid(){
         int i = 0;
