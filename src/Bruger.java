@@ -1,3 +1,6 @@
+import java.time.LocalTime;
+import java.util.ArrayList;
+
 public abstract class Bruger {
     String name;
 
@@ -5,14 +8,12 @@ public abstract class Bruger {
 
 class Customer extends Bruger{
     Time t;
+    int saldo;
     private static int i= 0;
-    static int kundeID=0;
     public Customer(String name, Time t) {
         this.name = name;
         this.t = t;
         i++;
-        kundeID = i;
-
     }
 
     @Override
