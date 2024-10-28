@@ -6,14 +6,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-public class WeeklyCalendar {
+import java.io.*;
+public class WeeklyCalendar implements Serializable{
     int i;
     LocalDate dateDatoValg;
     Scanner scanner = new Scanner(System.in);
     ArrayList<Time> generedeTider = new ArrayList();
     ArrayList<Time> ledigeTider = new ArrayList();
     ArrayList<Customer> booketTider = new ArrayList();
+    ArrayList<Betalinger> betalteTider = new ArrayList<>();
     LocalTime start = LocalTime.of(10,0);
     LocalTime stop = LocalTime.of(18,0);
     LocalDate startDate = LocalDate.now();
@@ -41,7 +42,11 @@ public class WeeklyCalendar {
     }
     public void visTider() {// Viser alle ledige tider i listen ledigeTider
         List<LocalDate> dates = getNextFiveDays();
-        System.out.println(dates);
+        System.out.println("Vælg et nummer for den ønskede dato ");
+
+        for (int i = 0;i<dates.size();i++){
+            System.out.println(i+1+": "+dates.get(i));
+        }
         int valgtDato = scanner.nextInt();
         dateDatoValg = dates.get(valgtDato-1);
         printTiderForDato(dateDatoValg);
@@ -109,6 +114,7 @@ public class WeeklyCalendar {
         String navn = scanner.nextLine();
         booketTider.add(new Customer(navn,valgTid));
         ledigeTider.remove(valgTid);
+        System.out.println("Din booking for " + navn + " " + "klokken: " + valgTid + " er nu bekræftet.");
 
     }
 
@@ -119,10 +125,33 @@ public class WeeklyCalendar {
             i++;
             System.out.println(i+ ": "+s);
         }
+        System.out.println("Vælg et nummer for den tid du gerne vil annulere: ");
         int valgtTid = scanner.nextInt()-1;
         ledigeTider.add(ledigeTider.get(valgtTid));
         System.out.println("Du har nu annuleret din tid: "+booketTider.get(valgtTid));
         booketTider.remove(valgtTid);
+    }
+
+
+    public void betalTid(){
+        int i = 0;
+        int saldo = 0;
+        for (Customer s:booketTider){
+            i++;
+            System.out.println(i+ ": "+s);
+        }
+        while (true) {
+            System.out.println("Kunne du tænkte dig at tilkøbe nogle produkter? ");
+            System.out.println("Tast '1' for ja");
+            System.out.println("Tast '2' for nej");
+            int valgMulighed = scanner.nextInt();
+            if (valgMulighed==1){
+                System.out.println();
+            }
+        }
+        System.out.println("Vælg et nummer for den tid du gerne vil betale: ");
+        int valgtTid = scanner.nextInt()-1;
+        betalteTider.add(new Betalinger(booketTider.get(valgtTid),saldo));
     }
 }
 

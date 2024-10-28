@@ -8,16 +8,12 @@ public abstract class Bruger {
 
 class Customer extends Bruger{
     Time t;
-    int phone;
+    int saldo;
     private static int i= 0;
-    static int kundeID=0;
     public Customer(String name, Time t) {
         this.name = name;
-        this.phone = phone;
         this.t = t;
         i++;
-        kundeID = i;
-
     }
 
     @Override

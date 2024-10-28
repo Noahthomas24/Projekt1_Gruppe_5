@@ -5,13 +5,9 @@ import java.util.SortedMap;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        WeeklyCalendar g = new WeeklyCalendar();
-        g.genTid();
-        g.visTider();
-        g.bookTid();
-        g.annullerTid();
-        System.out.println();
+
+        Harrys_Salon h = new Harrys_Salon();
+        h.Harrys_Salon();
 
 
         }
