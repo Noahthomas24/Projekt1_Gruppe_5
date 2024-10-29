@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.io.*;
-public class WeeklyCalendar implements Serializable {
-    int i;
+public class WeeklyCalendar{
     LocalDate dateDatoValg;
     Scanner scanner = new Scanner(System.in);
     ArrayList<Produkt> produkter = new ArrayList<>();
     Produkt klippetid = new Produkt("Klippetid", 250);
 
-    String password = "harry";
+    String password = "HairyHarry";
 
     LocalTime morgenTid = LocalTime.of(10, 30, 00);
     LocalDate enUgeSiden = LocalDate.of(2024, 10, 22);
@@ -39,7 +38,7 @@ public class WeeklyCalendar implements Serializable {
         betalteTider.add(new Betalinger(k1, 500)); //Tilføjer en fiktiv betaling til betalingsoversigten (bruges som test).
         betalteTider.add(new Betalinger(k2, 600));
 
-        for (i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             LocalDate currentDate = startDate.plusDays(i);
             DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
             if (dayOfWeek != DayOfWeek.SATURDAY && dayOfWeek != DayOfWeek.SUNDAY) {
@@ -219,7 +218,20 @@ public class WeeklyCalendar implements Serializable {
             System.out.println(b);
         }
     }
-}
 
+    public void ferieFriDage(){
+        System.out.println("Her kan du registrere en lukkedag.");
+        System.out.println("Indtast det ønskede år.");
+        int year = scanner.nextInt();
+        System.out.println("Indtast den ønskede måned");
+        int month = scanner.nextInt();
+        System.out.println("Indtast ønskede dag i måneden");
+        int day = scanner.nextInt();
+        LocalDate targetDate = LocalDate.of(year, month, day);
+        System.out.println(targetDate);
+
+        ledigeTider.removeIf(t -> t.getDate().equals(targetDate));
+    }
+}
 
 

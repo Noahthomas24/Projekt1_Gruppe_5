@@ -17,7 +17,7 @@ public class Harrys_Salon {
             System.out.println("Tast '4' for at logge ind som admin");
             System.out.println("Tast '0' for at afslutte");
             valg = scanner.nextInt();
-            if (valg ==0) break;
+            if (valg == 0) break;
             switch (valg){
                 case 1:
                     c.visTider();
@@ -32,14 +32,17 @@ public class Harrys_Salon {
                 case 4:
                     System.out.println("For at se de seneste betalinger, tast 1.");
                     System.out.println("For at søge på en specifik dato og se alle betalinger der, tast 2.");
+                    System.out.println("Tast '3' for at registrere lukkedage.");
                     int nytValg = scanner.nextInt();
 
                     switch (nytValg){
                         case 1: c.visSenesteBetalinger(); break;
                         case 2: c.visBetalingerForSpecifikDato(); break;
+                        case 3: c.ferieFriDage(); break;
+                        default: continue;
                     }
                 default:
-                    continue;
+                    break;
             }
         }
     }
