@@ -11,6 +11,10 @@ public class WeeklyCalendar implements Serializable{
     int i;
     LocalDate dateDatoValg;
     Scanner scanner = new Scanner(System.in);
+    ArrayList<Produkt> produkter = new ArrayList<>();
+    Produkt klippetid = new Produkt("Klippetid",250);
+
+    ArrayList<Produkt> kurv = new ArrayList<>();
     ArrayList<Time> generedeTider = new ArrayList();
     ArrayList<Time> ledigeTider = new ArrayList();
     ArrayList<Customer> booketTider = new ArrayList();
@@ -134,8 +138,13 @@ public class WeeklyCalendar implements Serializable{
 
 
     public void betalTid(){
+        int l = 0;
         int i = 0;
-        int saldo = 0;
+        int amount = 0;
+        produkter.add(new Produkt("Hairspray", 150));
+        produkter.add(new Produkt("Shampoo", 300));
+        produkter.add(new Produkt("Head and Shoulders", 30));
+
         for (Customer s:booketTider){
             i++;
             System.out.println(i+ ": "+s);
@@ -147,11 +156,40 @@ public class WeeklyCalendar implements Serializable{
             int valgMulighed = scanner.nextInt();
             if (valgMulighed==1){
                 System.out.println();
+                scanner.nextLine();
+                System.out.println("Vælg et nummer for det produkt du gerne vil købe.");
+                for (int j = 0; j<produkter.size();j++){
+                    System.out.println(j+1 +": "+produkter.get(j));
+                }
+                int produktValg=scanner.nextInt()-1;
+                produkter.get(produktValg);
+                kurv.add(produkter.get(produktValg));
+                for (Produkt p: kurv){
+                    System.out.println("Din kurv består nu af følgende produkter: ");
+                    System.out.println(p);
+                }
+                System.out.println(klippetid);
+                System.out.println();
             }
+            if (valgMulighed==2){
+                for (Produkt k:kurv){
+                    amount += k.pris;
+                }
+                System.out.println("Dit samlede beløb er: "+amount);
+
+                System.out.println();
+                int valgtTid = scanner.nextInt()-1;
+
+                betalteTider.add(new Betalinger(booketTider.get(valgtTid),amount));
+            }
+
+
+
         }
-        System.out.println("Vælg et nummer for den tid du gerne vil betale: ");
-        int valgtTid = scanner.nextInt()-1;
-        betalteTider.add(new Betalinger(booketTider.get(valgtTid),saldo));
+
     }
+
 }
+
+
 

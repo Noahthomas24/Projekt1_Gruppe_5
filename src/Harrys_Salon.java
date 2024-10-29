@@ -26,6 +26,7 @@ public class Harrys_Salon {
                     c.annullerTid();
                     break;
                 case 3:
+                    c.betalTid();
                     break;
                 case 4:
                     break;
