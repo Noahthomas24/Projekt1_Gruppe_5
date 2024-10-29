@@ -10,6 +10,10 @@ public class Time {
         this.dato=dato;
     }
 
+    public LocalDate getDate(){
+        return dato;
+    }
+
     @Override
     public String toString() {
         return "(" + tidspunkt +"-"+tidspunkt.plusMinutes(30)+ ')'+" "+dato;

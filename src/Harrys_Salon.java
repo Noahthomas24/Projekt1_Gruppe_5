@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Harrys_Salon {
@@ -10,10 +12,9 @@ public class Harrys_Salon {
         while (true){
             System.out.println("Velkommen til Harrys Salon");
             System.out.println("Tast '1' for at booke en tid");
-            System.out.println("Tast '2' for at annulere en tid");
+            System.out.println("Tast '2' for at annullere en tid");
             System.out.println("Tast '3' for at betale for din tid");
             System.out.println("Tast '4' for at logge ind som admin");
-            System.out.println("Tast '5' for at se vores hårprodukter");
             System.out.println("Tast '0' for at afslutte");
             valg = scanner.nextInt();
             if (valg ==0) break;
@@ -29,7 +30,14 @@ public class Harrys_Salon {
                     c.betalTid();
                     break;
                 case 4:
-                    break;
+                    System.out.println("For at se de seneste betalinger, tast 1.");
+                    System.out.println("For at søge på en specifik dato og se alle betalinger der, tast 2.");
+                    int nytValg = scanner.nextInt();
+
+                    switch (nytValg){
+                        case 1: c.visSenesteBetalinger(); break;
+                        case 2: c.visBetalingerForSpecifikDato(); break;
+                    }
                 default:
                     continue;
             }
