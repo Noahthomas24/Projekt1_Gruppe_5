@@ -12,6 +12,9 @@ public class Produkt {
         this.pris = pris;
     }
 
+    public double getPris(){
+        return pris;
+    }
 
 
     @Override

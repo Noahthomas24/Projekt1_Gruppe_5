@@ -30,8 +30,9 @@ public class Harrys_Salon {
                     c.betalTid();
                     break;
                 case 4:
-                    System.out.println("For at se de seneste betalinger, tast 1.");
-                    System.out.println("For at søge på en specifik dato og se alle betalinger der, tast 2.");
+                    if (!c.verifyPassword()) return;
+                    System.out.println("Tast '3' for at se de seneste betalinger.");
+                    System.out.println("Tast '2' for at søge på en specifik dato og se alle betalinger på den valgte dato.");
                     System.out.println("Tast '3' for at registrere lukkedage.");
                     int nytValg = scanner.nextInt();
 
