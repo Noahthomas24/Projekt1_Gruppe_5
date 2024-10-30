@@ -2,6 +2,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -62,7 +63,7 @@ public class WeeklyCalendar {
         for (int i = 0; i < dates.size(); i++) {
             System.out.println(i + 1 + ": " + dates.get(i));
         }
-        int valgtDato = scanner.nextInt();
+        int valgtDato = scannerNextInt();
         dateDatoValg = dates.get(valgtDato - 1);
         printTiderForDato(dateDatoValg);
     }
@@ -101,7 +102,7 @@ public class WeeklyCalendar {
     public void bookTid() {
         System.out.println("Indtast nummer for den tid du gerne vil vælge.");
         List<Time> tider = getTiderForDato(dateDatoValg);
-        int valg = scanner.nextInt() - 1;
+        int valg = scannerNextInt() - 1;
         Time valgTid = tider.get(valg);
         System.out.println("Du har valgt tiden: " + valgTid);
         System.out.println("Indtast dit navn.");
@@ -120,7 +121,7 @@ public class WeeklyCalendar {
             System.out.println(i + ": " + s);
         }
         System.out.println("Vælg et nummer for den tid du gerne vil annullere: ");
-        int valgtTid = scanner.nextInt() - 1;
+        int valgtTid = scannerNextInt() - 1;
         ledigeTider.add(ledigeTider.get(valgtTid));
         System.out.println("Du har nu annulleret din tid: " + bookedeTider.get(valgtTid));
         bookedeTider.remove(valgtTid);
@@ -135,13 +136,13 @@ public class WeeklyCalendar {
 
         while (true) {
             System.out.println("Vil du købe yderligere produkter? (1=Ja, 2=Nej)");
-            int valgMulighed = scanner.nextInt();
+            int valgMulighed = scannerNextInt();
             if (valgMulighed == 1) {
                 System.out.println("Vælg et nummer for det produkt du gerne vil købe.");
                 for (int i = 0; i < produkter.size(); i++) {
                     System.out.println(i + 1 + ": " + produkter.get(i));
                 }
-                int produktValg = scanner.nextInt() - 1;
+                int produktValg = scannerNextInt() - 1;
                 kurv.add(produkter.get(produktValg));
                 System.out.println("Du har valgt følgende varer: ");
                 for (Produkt p : kurv) {
@@ -162,6 +163,7 @@ public class WeeklyCalendar {
     // Bekræfter kodeord
     public boolean verifyPassword() {
         System.out.println("Indtast kodeord");
+        scanner.nextLine();
         String kodeord = scanner.nextLine();
         while (!kodeord.equals(password)) {
             System.out.println("Ugyldigt kodeord, prøv igen");
@@ -173,7 +175,7 @@ public class WeeklyCalendar {
     // Viser betalinger for en specifik dato
     public void visBetalingerForSpecifikDato() {
         System.out.println("Indtast ønsket år, måned og dag for betalingen (ÅÅÅÅ MM DD):");
-        LocalDate targetDate = LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+        LocalDate targetDate = LocalDate.of(scannerNextInt(), scannerNextInt(), scannerNextInt());
 
 
         for (Betalinger b : betalteTider) {
@@ -193,8 +195,20 @@ public class WeeklyCalendar {
 
         // Registrerer lukkedage
         public void ferieFriDage() {
-            System.out.println("Indtast år, måned og dag for lukkedagen:");
-            LocalDate targetDate = LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+            System.out.println("Indtast år, måned og dag for lukkedagen (ÅÅÅÅ MM DD):");
+            LocalDate targetDate = LocalDate.of(scannerNextInt(), scannerNextInt(), scannerNextInt());
             ledigeTider.removeIf(t -> t.getDate().equals(targetDate));
+        }
+
+        public int scannerNextInt() {
+            int i = 0;
+            try {
+                i = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Ugyldigt input, du skal skrive et heltal.");
+                scanner.nextLine();
+                i = scanner.nextInt();
+            }
+            return i;
         }
     }

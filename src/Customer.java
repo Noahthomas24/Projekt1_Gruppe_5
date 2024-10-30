@@ -9,6 +9,6 @@ public class Customer{
 
     @Override
     public String toString() {
-        return name+"-"+t;
+        return name+" - "+t;
     }
 }

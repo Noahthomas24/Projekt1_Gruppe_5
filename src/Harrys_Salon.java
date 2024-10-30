@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Harrys_Salon {
-    Scanner scanner = new Scanner(System.in);
     WeeklyCalendar c = new WeeklyCalendar();
 
     public void Harrys_Salon(){
@@ -14,7 +13,7 @@ public class Harrys_Salon {
             System.out.println("Tast '3' for at betale for din tid");
             System.out.println("Tast '4' for at logge ind som admin");
             System.out.println("Tast '0' for at afslutte");
-            valg = scanner.nextInt();
+            valg = c.scannerNextInt();
             if (valg == 0) break;
             switch (valg){
                 case 1:
@@ -29,10 +28,10 @@ public class Harrys_Salon {
                     break;
                 case 4:
                     if (!c.verifyPassword()) return;
-                    System.out.println("Tast '3' for at se de seneste betalinger.");
+                    System.out.println("Tast '1' for at se de seneste betalinger.");
                     System.out.println("Tast '2' for at søge på en specifik dato og se alle betalinger på den valgte dato.");
                     System.out.println("Tast '3' for at registrere lukkedage.");
-                    int nytValg = scanner.nextInt();
+                    int nytValg = c.scannerNextInt();
 
                     switch (nytValg){
                         case 1: c.visSenesteBetalinger(); break;
