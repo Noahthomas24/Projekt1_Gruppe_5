@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Harrys_Salon {
     WeeklyCalendar c = new WeeklyCalendar();
 
-    public void Harrys_Salon(){
+    public void Harrys_Program(){
         c.genTid();
         int valg;
         while (true){

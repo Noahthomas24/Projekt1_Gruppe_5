@@ -11,14 +11,17 @@ public class WeeklyCalendar {
     // Klasse-variabler
     LocalDate dateDatoValg;
     Scanner scanner = new Scanner(System.in);
-    Produkt klippetid = new Produkt("Klippetid", 250);
     String password = "HairyHarry";
 
-    // Foruddefinerede tider og kunder som bliver tilføjet til listen over tidligere betalinger.
-    Time t1 = new Time(LocalTime.of(10, 30, 00), LocalDate.of(2024, 10, 22));
-    Time t2 = new Time(LocalTime.of(11, 00, 00), LocalDate.of(2024, 10, 21));
-    Customer k1 = new Customer("Simon", t1);
-    Customer k2 = new Customer("Per", t2);
+    // Åbningstider
+    LocalTime start = LocalTime.of(10, 0);
+    LocalTime stop = LocalTime.of(18, 0);
+    LocalDate startDate = LocalDate.now();
+
+    // Foruddefinerede produkter, tider og kunder som bliver tilføjet til listen over tidligere betalinger.
+    Customer k1 = new Customer("Simon", new Time(LocalTime.of(10, 30, 00), LocalDate.of(2024, 10, 22)));
+    Customer k2 = new Customer("Per", new Time(LocalTime.of(11, 00, 00), LocalDate.of(2024, 10, 21)));
+    Produkt klippetid = new Produkt("Klippetid", 250);
 
     // Lister til forskellige kategorier af tider og kunder
     ArrayList<Produkt> kurv = new ArrayList<>();
@@ -27,12 +30,6 @@ public class WeeklyCalendar {
     ArrayList<Customer> bookedeTider = new ArrayList<>();
     ArrayList<Betalinger> betalteTider = new ArrayList<>();
     ArrayList<Produkt> produkter = new ArrayList<>();
-
-
-    // Åbningstider
-    LocalTime start = LocalTime.of(10, 0);
-    LocalTime stop = LocalTime.of(18, 0);
-    LocalDate startDate = LocalDate.now();
 
     // Generer ledige tider for en uge
     public void genTid() {
@@ -200,6 +197,7 @@ public class WeeklyCalendar {
             ledigeTider.removeIf(t -> t.getDate().equals(targetDate));
         }
 
+        // Tjekker for at input er et tal.
         public int scannerNextInt() {
             int i = 0;
             try {
