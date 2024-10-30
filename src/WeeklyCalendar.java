@@ -172,13 +172,13 @@ public class WeeklyCalendar {
 
     // Viser betalinger for en specifik dato
     public void visBetalingerForSpecifikDato() {
-            System.out.println("Indtast ønsket år, måned og dag for betalingen:");
-            LocalDate targetDate = LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
+        System.out.println("Indtast ønsket år, måned og dag for betalingen:");
+        LocalDate targetDate = LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
 
 
-            for (Betalinger b : betalteTider) {
-                if (b.c.t.getDate().equals(targetDate)) { // Henter datoen fra tidspunktet, som er tilknyttet kunden, der er tilknyttet betalingen.
-                    System.out.println(b);
+        for (Betalinger b : betalteTider) {
+            if (b.c.t.getDate().equals(targetDate)) { // Henter datoen fra tidspunktet, som er tilknyttet kunden, der er tilknyttet betalingen.
+                System.out.println(b);
                 }
             }
     }
